@@ -5,20 +5,9 @@ syntax = "proto3";
 */
 
 import "google/protobuf/timestamp.proto";
-import "color.proto";
+import "pronoun.proto";
 import "query.proto";
 
-
-message Pronoun {
-    /** The raw text pronoun. Obligatory and used for accessibility. **/
-    string pronoun = 1;
-    /** The QuickText to be displayed on a server with that capability **/
-    optional string display = 2;
-    /** An optional color that will be displayed on servers without QuickText support **/
-    optional Color color = 3;
-    /** If that pronoun is visible on an user's profile **/
-    bool visible = 4;
-}
 package org.blocovermelho.wire.proto;
 
 
