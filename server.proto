@@ -21,7 +21,7 @@ message Modpack  {
 }
 
 message Server {
-    fixed64 server_id = 1;
+    bytes server_id = 1;
     string name = 2;
     optional Modpack modpack = 3;
     repeated string versions = 4;
@@ -48,22 +48,22 @@ message CreateReply {
 }
 
 message UpdateModpackRequest {
-    fixed64 server_id = 1;
+    bytes server_id = 1;
     optional Modpack pack = 2;
 }
 
 message UpdateVersionsRequest {
-    fixed64 server_id = 1;
+    bytes server_id = 1;
     repeating string versions = 2;
 }
 
 message OnlineRequest {
-    fixed64 server_id = 1;
+    bytes server_id = 1;
 }
 
 
 message OfflineRequest {
-    fixed64 server_id = 1;
+    bytes server_id = 1;
 }
 
 message NameReply {

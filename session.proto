@@ -8,8 +8,8 @@ package org.blocovermelho.wire.account.session;
 
 message QueryRequest {
     reserved 4;
-    fixed64 user_uuid = 1;
-    optional fixed64 server_uuid = 2;
+    bytes user_uuid = 1;
+    optional bytes server_uuid = 2;
     fixed32 ipv4_user_addr = 3;
     /** 4: Reserved for future ipv6 support **/
 }
@@ -27,7 +27,7 @@ message QueryReply {
 
 message AllowRequest {
     reserved 3;
-    fixed64 user_uuid = 1;
+    bytes user_uuid = 1;
     fixed32 ipv4_user_addr = 2;
     /** 3: Reserved for future ipv6 support **/
 }
@@ -47,10 +47,10 @@ message DissalowRequest {
     reserved 2;
     oneof source {
         string discord_id = 11;
-        fixed64 user_uuid = 12;
+        bytes user_uuid = 12;
     }
 
-    fixed64 ipv4_user_addr = 1;
+    bytes ipv4_user_addr = 1;
     /** 2: Reserved for future ipv6 support **/
 }
 
@@ -66,10 +66,10 @@ message DissalowReply {
 
 message PardonRequest {
     reserved 4;
-    fixed64 staff_id = 1;
+    bytes staff_id = 1;
     /** If this pardon should extend towards the entire entry **/
     bool extends = 2;
-    fixed64 ipv4_user_addr = 3;
+    bytes ipv4_user_addr = 3;
     /** 4: Reserved for future ipv6 support **/
 }
 

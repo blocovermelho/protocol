@@ -16,7 +16,7 @@ enum NameError {
 
 
 message IdQuery {
-    fixed64 id = 1;
+    bytes id = 1;
 }
 
 enum IdError {

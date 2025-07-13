@@ -25,7 +25,7 @@ message Pronoun {
 message User {
     reserved 2;
     /** Internal UUID. Exclusive to BV **/
-    fixed64 user_id = 1;
+    bytes user_id = 1;
     /** 2: Reserved for mojang uuid **/
     string discord_id = 3;
     string username = 4;
@@ -34,14 +34,14 @@ message User {
     google.protobuf.Timestamp created_at = 6;
     google.protobuf.Timestamp last_seen = 7;
 
-    optional fixed64 last_server = 8;
+    optional bytes last_server = 8;
 }
 
 message CreateRequest {
     reserved 2;
-    fixed64 user_id = 1;
+    bytes user_id = 1;
     /** 2: Reserved for mojang uuid **/
-    fixed64 server_id = 3;
+    bytes server_id = 3;
     string discord_id = 4;
     string username = 5;
 }
@@ -59,7 +59,7 @@ message CreateReply {
 }
 
 message UpdatePronounsRequest {
-    fixed64 user_id = 1;
+    bytes user_id = 1;
     repeated Pronoun pronouns = 2;
 }
 

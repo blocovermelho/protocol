@@ -8,8 +8,8 @@ package org.blocovermelho.wire.account;
 
 message LoginRequest {
     reserved 4;
-    fixed64 user_uuid = 1;
-    fixed64 server_uuid = 2;
+    bytes user_uuid = 1;
+    bytes server_uuid = 2;
     fixed32 ipv4_user_addr = 3;
     /** 4: Reserved for future ipv6 support **/
     string password = 5;
@@ -33,18 +33,18 @@ message LoginReply {
 }
 
 message PasswordChangeRequest {
-    fixed64 user_uuid = 1;
+    bytes user_uuid = 1;
     string old_password = 2;
     string new_password = 3;
 }
 
 message CreateReply {
-    fixed64 user_uuid = 1;
+    bytes user_uuid = 1;
     bool success = 2;
 }
 
 message DeleteReply {
-    fixed64 user_uuid = 1;
+    bytes user_uuid = 1;
     bool success = 2;
 }
 
