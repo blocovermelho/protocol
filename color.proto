@@ -31,4 +31,10 @@ message Color {
   MinecraftColor quantized = 2;
 }
 
+message QuantizeRequest { fixed32 rgb_code = 1; }
+
+message QuantizeResponse { MinecraftColor quantization = 1; }
+
+service ColorService {
+  rpc Quantize(QuantizeRequest) returns (QuantizeResponse);
 }
