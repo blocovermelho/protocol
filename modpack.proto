@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+/*
+ * Definitions for BV Wire API - Modpack
+ */
+
+package org.blocovermelho.wire.proto;
+
+import "version.proto";
+
+message Modpack  {
+    oneof uri {
+        string modrinth_id = 11;
+        uint32 curseforge_id = 12;
+        string other_uri = 13;
+    }
+
+    Version version = 1;
+    /** If the modpack is required to join the server **/
+    bool req = 2;
+}

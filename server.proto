@@ -7,18 +7,7 @@ syntax = "proto3";
 package org.blocovermelho.wire.proto;
 
 import "query.proto";
-
-message Modpack  {
-    oneof uri {
-        string modrinth_id = 11;
-        uint32 curseforge_id = 12;
-        string other_uri = 13;
-    }
-
-    string version = 1;
-    /** If the modpack is required to join the server **/
-    bool req = 2;
-}
+import "modpack.proto";
 
 message Server {
     bytes server_id = 1;
