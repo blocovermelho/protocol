@@ -5,25 +5,18 @@ syntax = "proto3";
  */
 
 
-message NameQuery {
-    string name = 1;
-}
+message NameQuery { string name = 1; }
 
 enum NameError {
-    NAME_ERROR_UNSPECIFIED = 0;
-    NAME_NOT_FOUND = 1;
+  NAME_ERROR_UNSPECIFIED = 0;
+  NAME_NOT_FOUND = 1;
 }
 
-
-message IdQuery {
-    bytes id = 1;
-}
+message IdQuery { bytes id = 1; }
 
 enum IdError {
-    ID_ERROR_UNSPECIFIED = 0;
-    ID_NOT_FOUND = 1;
+  ID_ERROR_UNSPECIFIED = 0;
+  ID_NOT_FOUND = 1;
 }
 
-message PageQuery {
-    uint64 page = 1;
-}
+message PageQuery { uint64 page = 1; }

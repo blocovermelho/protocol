@@ -11,80 +11,75 @@ import "version.proto";
 import "modpack.proto";
 
 message Server {
-    bytes server_id = 1;
-    string name = 2;
-    optional Modpack modpack = 3;
-    repeated Version versions = 4;
-    bool online = 5;
-    /** repeated User **/
+  bytes server_id = 1;
+  string name = 2;
+  optional Modpack modpack = 3;
+  repeated Version versions = 4;
+  bool online = 5;
+  /** repeated User **/
 }
 
 message CreateRequest {
-    string name = 1;
-    optional Modpack modpack = 2;
-    repeated string versions = 3;
+  string name = 1;
+  optional Modpack modpack = 2;
+  repeated string versions = 3;
 }
 
 enum CreateError {
-    CREATE_ERROR_UNSPECIFIED = 0;
-    DUPLICATE_NAME = 1;
+  CREATE_ERROR_UNSPECIFIED = 0;
+  DUPLICATE_NAME = 1;
 }
 
 message CreateReply {
-    oneof reply {
-        CreateError error = 11;
-        Server server = 12;
-    }
+  oneof reply {
+    CreateError error = 11;
+    Server server = 12;
+  }
 }
 
 message UpdateModpackRequest {
-    bytes server_id = 1;
-    optional Modpack pack = 2;
+  bytes server_id = 1;
+  optional Modpack pack = 2;
 }
 
 message UpdateVersionsRequest {
-    bytes server_id = 1;
-    repeating string versions = 2;
+  bytes server_id = 1;
+  repeating string versions = 2;
 }
 
-message OnlineRequest {
-    bytes server_id = 1;
-}
+message OnlineRequest { bytes server_id = 1; }
 
-
-message OfflineRequest {
-    bytes server_id = 1;
-}
+message OfflineRequest { bytes server_id = 1; }
 
 message NameReply {
-    oneof result {
-        NameError error = 11;
-        Server server = 12;
-    }
+  oneof result {
+    NameError error = 11;
+    Server server = 12;
+  }
 }
 
 message IdReply {
-    oneof result {
-        IdError error = 11;
-        Server server = 12;
-    }
+  oneof result {
+    IdError error = 11;
+    Server server = 12;
+  }
 }
 
 message PagedServers {
-    uint64 pages = 1;
-    uint64 total_pages = 2;
-    uint64 count = 3;
+  uint64 pages = 1;
+  uint64 total_pages = 2;
+  uint64 count = 3;
 
-    repeated Server servers = 4;
+  repeated Server servers = 4;
 }
 
 service ServerService {
-    rpc Create(CreateRequest) returns (CreateReply);
-    rpc Search(NameQuery) returns (NameReply);
-    rpc Get(IdQuery) returns (IdReply);
-    rpc Gets(PageQuery) returns (PagedServers);
-    rpc UpdateModpack(UpdateModpackRequest) returns (Server);
-    rpc UpdateVersions(UpdateVersionsRequest) returns (Server);
-    rpc SetOnline(OnlineRequest) returns ();
-    rpc SetOffline(OfflineRequest) returns ();
+  rpc Create(CreateRequest) returns (CreateReply);
+  rpc Search(NameQuery) returns (NameReply);
+  rpc Get(IdQuery) returns (IdReply);
+  rpc Gets(PageQuery) returns (PagedServers);
+  rpc UpdateModpack(UpdateModpackRequest) returns (Server);
+  rpc UpdateVersions(UpdateVersionsRequest) returns (Server);
+  rpc SetOnline(OnlineRequest) returns ();
+  rpc SetOffline(OfflineRequest) returns ();
 }

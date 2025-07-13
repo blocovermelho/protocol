@@ -7,10 +7,10 @@ syntax = "proto3";
 package org.blocovermelho.wire.proto;
 
 message Version {
-    string raw = 1;
-    optional oneof uri {
-        string modrinth_id = 11;
-        uint64 curseforge_id = 12;
-        string other_uri = 13;
-    }
+  string raw = 1;
+  optional oneof uri {
+    string modrinth_id = 11;
+    uint64 curseforge_id = 12;
+    string other_uri = 13;
+  }
 }

@@ -8,14 +8,14 @@ package org.blocovermelho.wire.proto;
 
 import "version.proto";
 
-message Modpack  {
-    oneof uri {
-        string modrinth_id = 11;
-        uint32 curseforge_id = 12;
-        string other_uri = 13;
-    }
+message Modpack {
+  oneof uri {
+    string modrinth_id = 11;
+    uint32 curseforge_id = 12;
+    string other_uri = 13;
+  }
 
-    Version version = 1;
-    /** If the modpack is required to join the server **/
-    bool req = 2;
+  Version version = 1;
+  /** If the modpack is required to join the server **/
+  bool req = 2;
 }

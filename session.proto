@@ -1,90 +1,82 @@
 syntax = "proto3";
 
 /*
-* Definitions for BV Wire API - Session
-*/
+ * Definitions for BV Wire API - Session
+ */
 
 package org.blocovermelho.wire.proto;
 
 message QueryRequest {
-    reserved 4;
-    bytes user_uuid = 1;
-    optional bytes server_uuid = 2;
-    fixed32 ipv4_user_addr = 3;
-    /** 4: Reserved for future ipv6 support **/
+  reserved 4;
+  bytes user_uuid = 1;
+  optional bytes server_uuid = 2;
+  fixed32 ipv4_user_addr = 3;
+  /** 4: Reserved for future ipv6 support **/
 }
 
 enum QueryReplyKind {
-    QUERY_REPLY_KIND_UNSPECIFIED = 0;
-    FOUND = 1;
-    NO_MATCHING_IP = 2;
-    NO_ACCOUNT_FOUND = 3;
+  QUERY_REPLY_KIND_UNSPECIFIED = 0;
+  FOUND = 1;
+  NO_MATCHING_IP = 2;
+  NO_ACCOUNT_FOUND = 3;
 }
 
-message QueryReply {
-    QueryReplyKind type = 1;
-}
+message QueryReply { QueryReplyKind type = 1; }
 
 message AllowRequest {
-    reserved 3;
-    bytes user_uuid = 1;
-    fixed32 ipv4_user_addr = 2;
-    /** 3: Reserved for future ipv6 support **/
+  reserved 3;
+  bytes user_uuid = 1;
+  fixed32 ipv4_user_addr = 2;
+  /** 3: Reserved for future ipv6 support **/
 }
 
 enum AllowReplyKind {
-    ALLOW_REPLY_KIND_UNSPECIFIED = 0;
-    ACCEPTED_IP = 1;
-    MERGED_IP = 2;
-    BANNED_IP = 3;
+  ALLOW_REPLY_KIND_UNSPECIFIED = 0;
+  ACCEPTED_IP = 1;
+  MERGED_IP = 2;
+  BANNED_IP = 3;
 }
 
-message AllowReply {
-    AllowReplyKind = 1;
-}
+message AllowReply { AllowReplyKind = 1; }
 
 message DissalowRequest {
-    reserved 2;
-    oneof source {
-        string discord_id = 11;
-        bytes user_uuid = 12;
-    }
+  reserved 2;
+  oneof source {
+    string discord_id = 11;
+    bytes user_uuid = 12;
+  }
 
-    bytes ipv4_user_addr = 1;
-    /** 2: Reserved for future ipv6 support **/
+  bytes ipv4_user_addr = 1;
+  /** 2: Reserved for future ipv6 support **/
 }
 
 enum DissalowReplyKind {
-    DISALLOW_REPLY_KIND_UNSPECIFIED = 0;
-    NEW_IP = 1;
-    MERGED_IP = 2;
+  DISALLOW_REPLY_KIND_UNSPECIFIED = 0;
+  NEW_IP = 1;
+  MERGED_IP = 2;
 }
 
-message DissalowReply {
-    DissalowReplyKind type = 1;
-}
+message DissalowReply { DissalowReplyKind type = 1; }
 
 message PardonRequest {
-    reserved 4;
-    bytes staff_id = 1;
-    /** If this pardon should extend towards the entire entry **/
-    bool extends = 2;
-    bytes ipv4_user_addr = 3;
-    /** 4: Reserved for future ipv6 support **/
+  reserved 4;
+  bytes staff_id = 1;
+  /** If this pardon should extend towards the entire entry **/
+  bool extends = 2;
+  bytes ipv4_user_addr = 3;
+  /** 4: Reserved for future ipv6 support **/
 }
 
 enum PardonReplyKind {
-    PARDON_REPLY_KIND_UNSPECIFIED = 0;
-    SUCCESSFUL = 1;
+  PARDON_REPLY_KIND_UNSPECIFIED = 0;
+  SUCCESSFUL = 1;
 }
 
-message PardonReply {
-    PardonReplyKind type = 1;
-}
+message PardonReply { PardonReplyKind type = 1; }
 
 service Session {
-    rpc Query(QueryRequest) returns (QueryReply);
-    rpc AllowIp(AllowRequest) returns (AllowReply);
-    rpc DisallowIp(DissalowRequest) returns (DissalowReply);
-    rpc PardonIp(PardonRequest) returns (PardonReply);
+  rpc Query(QueryRequest) returns (QueryReply);
+  rpc AllowIp(AllowRequest) returns (AllowReply);
+  rpc DisallowIp(DissalowRequest) returns (DissalowReply);
+  rpc PardonIp(PardonRequest) returns (PardonReply);
 }

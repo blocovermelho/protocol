@@ -9,13 +9,14 @@ package org.blocovermelho.wire.proto;
 import "color.proto";
 
 message Pronoun {
-    bytes pronoun_id = 1;
-    bytes owner_id = 2;
-    /** The raw text pronoun. Obligatory and used for accessibility. **/
-    string raw = 3;
-    /** The QuickText to be displayed on a server with that capability **/
-    optional string display = 4;
-    /** An optional color that will be displayed on servers without QuickText support **/
-    optional Color color = 5;
+  bytes pronoun_id = 1;
+  bytes owner_id = 2;
+  /** The raw text pronoun. Obligatory and used for accessibility. **/
+  string raw = 3;
+  /** The QuickText to be displayed on a server with that capability **/
+  optional string display = 4;
+  /** An optional color that will be displayed on servers without QuickText
+   * support **/
+  optional Color color = 5;
 }
 
