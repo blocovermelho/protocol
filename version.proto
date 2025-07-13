@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+/*
+ * Definitions for BV Wire API - Version
+ */
+
+package org.blocovermelho.wire.proto;
+
+message Version {
+    string raw = 1;
+    optional oneof uri {
+        string modrinth_id = 11;
+        uint64 curseforge_id = 12;
+        string other_uri = 13;
+    }
+}

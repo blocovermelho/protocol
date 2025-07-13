@@ -7,13 +7,14 @@ syntax = "proto3";
 package org.blocovermelho.wire.proto;
 
 import "query.proto";
+import "version.proto";
 import "modpack.proto";
 
 message Server {
     bytes server_id = 1;
     string name = 2;
     optional Modpack modpack = 3;
-    repeated string versions = 4;
+    repeated Version versions = 4;
     bool online = 5;
     /** repeated User **/
 }
