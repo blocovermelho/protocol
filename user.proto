@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+/*
+* Definitions for BV Wire API - User
+*/
+
+import "google/protobuf/timestamp.proto";
+import "color.proto";
+import "query.proto";
+
+package org.blocovermelho.wire.user;
+
+
+message Pronoun {
+    /** The raw text pronoun. Obligatory and used for accessibility. **/
+    string pronoun = 1;
+    /** The QuickText to be displayed on a server with that capability **/
+    optional string display = 2;
+    /** An optional color that will be displayed on servers without QuickText support **/
+    optional Color color = 3;
+    /** If that pronoun is visible on an user's profile **/
+    bool visible = 4;
+}
+
+message User {
+    reserved 2;
+    /** Internal UUID. Exclusive to BV **/
+    fixed64 user_id = 1;
+    /** 2: Reserved for mojang uuid **/
+    string discord_id = 3;
+    string username = 4;
+    repeated Pronoun pronouns = 5;
+
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp last_seen = 7;
+
+    optional fixed64 last_server = 8;
+}
+
+message CreateRequest {
+    reserved 2;
+    fixed64 user_id = 1;
+    /** 2: Reserved for mojang uuid **/
+    fixed64 server_id = 3;
+    string discord_id = 4;
+    string username = 5;
+}
+
+enum CreateErrorKind {
+    CREATE_ERROR_KIND_UNSPECIFIED = 0;
+    DUPLICATE_NAME = 1;
+}
+
+message CreateReply {
+    oneof reply {
+        CreateErrorKind error = 1;
+        User user = 2;
+    }
+}
+
+message UpdatePronounsRequest {
+    fixed64 user_id = 1;
+    repeated Pronoun pronouns = 2;
+}
+
+message NameReply {
+    oneof reply {
+        NameError error = 1;
+        User user = 2;
+    }
+}
+
+message IdReply {
+    oneof reply {
+        IdError error = 1;
+        User user = 2;
+    }
+}
+
+message PagedUsers {
+    uint64 pages = 1;
+    uint64 total_pages = 2;
+    uint64 count = 3;
+
+    repeated User users = 4;
+}
+
+service UserService {
+    rpc Create(CreateRequest) returns (CreateReply);
+    rpc Search(NameQuery) returns (NameReply);
+    rpc Get(IdQuery) returns (IdReply);
+    rpc Gets(PageQuery) returns (PagedUsers);
+    rpc SetPronouns(UpdatePronounsRequest) returns (User);
+}

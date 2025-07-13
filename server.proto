@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+/*
+ * Definitions for BV Wire API - Server
+ */
+
+package org.blocovermelho.wire.server;
+
+import "query.proto";
+
+message Modpack  {
+    oneof uri {
+        string modrinth_id = 11;
+        uint32 curseforge_id = 12;
+        string other_uri = 13;
+    }
+
+    string version = 1;
+    /** If the modpack is required to join the server **/
+    bool req = 2;
+}
+
+message Server {
+    fixed64 server_id = 1;
+    string name = 2;
+    optional Modpack modpack = 3;
+    repeated string versions = 4;
+    bool online = 5;
+    /** repeated User **/
+}
+
+message CreateRequest {
+    string name = 1;
+    optional Modpack modpack = 2;
+    repeated string versions = 3;
+}
+
+enum CreateError {
+    CREATE_ERROR_UNSPECIFIED = 0;
+    DUPLICATE_NAME = 1;
+}
+
+message CreateReply {
+    oneof reply {
+        CreateError error = 11;
+        Server server = 12;
+    }
+}
+
+message UpdateModpackRequest {
+    fixed64 server_id = 1;
+    optional Modpack pack = 2;
+}
+
+message UpdateVersionsRequest {
+    fixed64 server_id = 1;
+    repeating string versions = 2;
+}
+
+message OnlineRequest {
+    fixed64 server_id = 1;
+}
+
+
+message OfflineRequest {
+    fixed64 server_id = 1;
+}
+
+message NameReply {
+    oneof result {
+        NameError error = 11;
+        Server server = 12;
+    }
+}
+
+message IdReply {
+    oneof result {
+        IdError error = 11;
+        Server server = 12;
+    }
+}
+
+message PagedServers {
+    uint64 pages = 1;
+    uint64 total_pages = 2;
+    uint64 count = 3;
+
+    repeated Server servers = 4;
+}
+
+service ServerService {
+    rpc Create(CreateRequest) returns (CreateReply);
+    rpc Search(NameQuery) returns (NameReply);
+    rpc Get(IdQuery) returns (IdReply);
+    rpc Gets(PageQuery) returns (PagedServers);
+    rpc UpdateModpack(UpdateModpackRequest) returns (Server);
+    rpc UpdateVersions(UpdateVersionsRequest) returns (Server);
+    rpc SetOnline(OnlineRequest) returns ();
+    rpc SetOffline(OfflineRequest) returns ();
+}

@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+/*
+ * Definitions for BV Wire API - Account
+ */
+
+package org.blocovermelho.wire.account;
+
+message LoginRequest {
+    reserved 4;
+    fixed64 user_uuid = 1;
+    fixed64 server_uuid = 2;
+    fixed32 ipv4_user_addr = 3;
+    /** 4: Reserved for future ipv6 support **/
+    string password = 5;
+}
+
+enum LoginReplyKind {
+    reserved 2;
+    LRK_UNSPECIFIED = 0;
+    SUCCESSFUL = 1;
+    /** 2: Reserved for future One-Time-Password support **/
+    WRONG_PASSWORD = 3;
+    NO_USER_FOUND = 4;
+}
+
+message LoginReply {
+    LoginReplyKind type = 1;
+    optional uint32 error_count = 2;
+    // The value of incorrect attempts until the account gets locked.
+    optional uint32 leniency = 3;
+    optional bool is_locked = 4;
+}
+
+message PasswordChangeRequest {
+    fixed64 user_uuid = 1;
+    string old_password = 2;
+    string new_password = 3;
+}
+
+message CreateReply {
+    fixed64 user_uuid = 1;
+    bool success = 2;
+}
+
+message DeleteReply {
+    fixed64 user_uuid = 1;
+    bool success = 2;
+}
+
+service AccountService {
+    rpc Create(LoginRequest) returns (CreateReply);
+    rpc ChangePassword(PasswordChangeRequest) returns (LoginReply);
+    rpc Login(LoginRequest) returns (LoginReply);
+    rpc Delete(LoginRequest) returns (DeleteReply);
+}
