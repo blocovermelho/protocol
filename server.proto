@@ -4,7 +4,7 @@ syntax = "proto3";
  * Definitions for BV Wire API - Server
  */
 
-package org.blocovermelho.wire.server;
+package org.blocovermelho.wire.proto;
 
 import "query.proto";
 

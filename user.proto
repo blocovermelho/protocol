@@ -8,8 +8,6 @@ import "google/protobuf/timestamp.proto";
 import "color.proto";
 import "query.proto";
 
-package org.blocovermelho.wire.user;
-
 
 message Pronoun {
     /** The raw text pronoun. Obligatory and used for accessibility. **/
@@ -21,6 +19,8 @@ message Pronoun {
     /** If that pronoun is visible on an user's profile **/
     bool visible = 4;
 }
+package org.blocovermelho.wire.proto;
+
 
 message User {
     reserved 2;

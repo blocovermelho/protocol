@@ -1,6 +1,10 @@
+syntax = "proto3";
+
 /*
  * Definitions for BV Wire API - Color
  */
+
+package org.blocovermelho.wire.proto;
 
 enum MinecraftColor {
     BLACK = 0;
