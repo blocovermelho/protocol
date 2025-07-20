@@ -4,7 +4,7 @@ syntax = "proto3";
  * Definitions for BV Wire API - Version
  */
 
-package org.blocovermelho.wire.version;
+package org.blocovermelho.wire.proto;
 
 message Version {
   string raw = 1;

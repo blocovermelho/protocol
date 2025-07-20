@@ -4,7 +4,7 @@ syntax = "proto3";
  * Definitions for BV Wire API - Session
  */
 
-package org.blocovermelho.wire.session;
+package org.blocovermelho.wire.proto;
 
 message QueryRequest {
   reserved 4;
