@@ -37,7 +37,7 @@ enum AllowReplyKind {
   BANNED_IP = 3;
 }
 
-message AllowReply { AllowReplyKind = 1; }
+message AllowReply { AllowReplyKind type = 1; }
 
 message DissalowRequest {
   reserved 2;
