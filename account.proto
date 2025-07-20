@@ -17,8 +17,8 @@ message LoginRequest {
 
 enum LoginReplyKind {
   LRK_UNSPECIFIED = 0;
-  SUCCESSFUL = 1;
-  SUCCESSFUL_OTP = 2;
+  LRK_SUCCESSFUL = 1;
+  LRK_SUCCESSFUL_OTP = 2;
   WRONG_PASSWORD = 3;
   NO_USER_FOUND = 4;
 }

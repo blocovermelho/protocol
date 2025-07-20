@@ -69,7 +69,7 @@ message PardonRequest {
 
 enum PardonReplyKind {
   PARDON_REPLY_KIND_UNSPECIFIED = 0;
-  SUCCESSFUL = 1;
+  PRK_SUCCESSFUL = 1;
 }
 
 message PardonReply { PardonReplyKind type = 1; }
