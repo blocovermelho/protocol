@@ -39,7 +39,7 @@ message UpdateMojang {
 
 
 enum UpdateMojangErrorKind {
-  UPDATE_NAME_ERROR_KIND_UNSPECIFIED = 0;
+  UPDATE_MOJANG_ERROR_KIND_UNSPECIFIED = 0;
   DUPLICATE_MOJANG_UUID = 1;
 }
 
