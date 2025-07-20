@@ -53,19 +53,19 @@ message ClonePronoun {
   bytes user_id = 2;
 }
 
-message CreateReply {
+message CreatePronounReply {
   bytes pronoun_id = 1;
   bool success = 2;
 }
 
-message DeleteReply {
+message DeletePronounReply {
   Pronoun pronoun = 1;
   bool success = 2;
 }
 
 service PronounService {
-  rpc Create(CreatePronoun) returns (CreateReply);
-  rpc Delete(DeletePronoun) returns (DeleteReply);
+  rpc Create(CreatePronoun) returns (CreatePronounReply);
+  rpc Delete(DeletePronoun) returns (DeletePronounReply);
   rpc Clone(ClonePronoun) returns (Pronoun);
   rpc SetDisplay(UpdateDisplay) returns (Pronoun);
   rpc SetColor(UpdateColor) returns (Pronoun);

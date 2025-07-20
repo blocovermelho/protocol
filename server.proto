@@ -19,7 +19,7 @@ message Server {
   /** repeated User **/
 }
 
-message CreateRequest {
+message CreateServerRequest {
   string name = 1;
   optional Modpack modpack = 2;
   repeated string versions = 3;
@@ -30,7 +30,7 @@ enum CreateError {
   DUPLICATE_NAME = 1;
 }
 
-message CreateReply {
+message CreateServerReply {
   oneof reply {
     CreateError error = 11;
     Server server = 12;
@@ -51,14 +51,14 @@ message OnlineRequest { bytes server_id = 1; }
 
 message OfflineRequest { bytes server_id = 1; }
 
-message NameReply {
+message ServerNameReply {
   oneof result {
     NameError error = 11;
     Server server = 12;
   }
 }
 
-message IdReply {
+message ServerIdReply {
   oneof result {
     IdError error = 11;
     Server server = 12;
@@ -74,9 +74,9 @@ message PagedServers {
 }
 
 service ServerService {
-  rpc Create(CreateRequest) returns (CreateReply);
-  rpc Search(NameQuery) returns (NameReply);
-  rpc Get(IdQuery) returns (IdReply);
+  rpc Create(CreateServerRequest) returns (CreateServerReply);
+  rpc Search(NameQuery) returns (ServerNameReply);
+  rpc Get(IdQuery) returns (ServerIdReply);
   rpc Gets(PageQuery) returns (PagedServers);
   rpc UpdateModpack(UpdateModpackRequest) returns (Server);
   rpc UpdateVersions(UpdateVersionsRequest) returns (Server);

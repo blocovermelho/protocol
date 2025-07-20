@@ -37,12 +37,12 @@ message PasswordChangeRequest {
   string new_password = 3;
 }
 
-message CreateReply {
+message CreateAccountReply {
   bytes user_uuid = 1;
   bool success = 2;
 }
 
-message DeleteReply {
+message DeleteAccountReply {
   bytes user_uuid = 1;
   bool success = 2;
 }
@@ -53,9 +53,9 @@ message OtpLoginRequest {
 }
 
 service AccountService {
-  rpc Create(LoginRequest) returns (CreateReply);
+  rpc Create(LoginRequest) returns (CreateAccountReply);
   rpc ChangePassword(PasswordChangeRequest) returns (LoginReply);
   rpc Login(LoginRequest) returns (LoginReply);
   rpc OtpLogin(OtpLoginRequest) returns (LoginReply);
-  rpc Delete(LoginRequest) returns (DeleteReply);
+  rpc Delete(LoginRequest) returns (DeleteAccountReply);
 }

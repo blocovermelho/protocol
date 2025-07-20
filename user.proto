@@ -24,7 +24,7 @@ message User {
   optional bytes last_server = 8;
 }
 
-message CreateRequest {
+message CreateUserRequest {
   bytes user_id = 1;
   optional bytes mojang_id = 2;
   bytes server_id = 3;
@@ -79,21 +79,21 @@ enum CreateErrorKind {
   DUPLICATE_NAME = 1;
 }
 
-message CreateReply {
+message CreateUserReply {
   oneof reply {
     CreateErrorKind error = 1;
     User user = 2;
   }
 }
 
-message NameReply {
+message UserNameReply {
   oneof reply {
     NameError error = 1;
     User user = 2;
   }
 }
 
-message IdReply {
+message UserIdReply {
   oneof reply {
     IdError error = 1;
     User user = 2;
@@ -109,9 +109,9 @@ message PagedUsers {
 }
 
 service UserService {
-  rpc Create(CreateRequest) returns (CreateReply);
-  rpc Search(NameQuery) returns (NameReply);
-  rpc Get(IdQuery) returns (IdReply);
+  rpc Create(CreateUserRequest) returns (CreateUserReply);
+  rpc Search(NameQuery) returns (UserNameReply);
+  rpc Get(IdQuery) returns (UserIdReply);
   rpc GetMojang(IdQuery) returns (IdReply);
   rpc Gets(PageQuery) returns (PagedUsers);
   rpc SetUsername(UpdateUsername) returns (UpdateNameReply);
