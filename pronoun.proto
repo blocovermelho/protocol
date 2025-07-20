@@ -39,7 +39,7 @@ message UpdateDisplay {
 message UpdateColor {
   bytes pronoun_id = 1;
   bytes user_id = 2;
-  Color color = 2;
+  Color color = 3;
 }
 
 message UpdateRaw {
