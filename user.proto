@@ -46,11 +46,6 @@ message CreateReply {
   }
 }
 
-message UpdatePronounsRequest {
-  bytes user_id = 1;
-  repeated Pronoun pronouns = 2;
-}
-
 message NameReply {
   oneof reply {
     NameError error = 1;
@@ -78,5 +73,4 @@ service UserService {
   rpc Search(NameQuery) returns (NameReply);
   rpc Get(IdQuery) returns (IdReply);
   rpc Gets(PageQuery) returns (PagedUsers);
-  rpc SetPronouns(UpdatePronounsRequest) returns (User);
 }
