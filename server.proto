@@ -44,7 +44,7 @@ message UpdateModpackRequest {
 
 message UpdateVersionsRequest {
   bytes server_id = 1;
-  repeating string versions = 2;
+  repeated string versions = 2;
 }
 
 message OnlineRequest { bytes server_id = 1; }
