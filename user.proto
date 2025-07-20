@@ -11,10 +11,9 @@ import "pronoun.proto";
 import "query.proto";
 
 message User {
-  reserved 2;
   /** Internal UUID. Exclusive to BV **/
   bytes user_id = 1;
-  /** 2: Reserved for mojang uuid **/
+  optional bytes mojang_id = 2;
   string discord_id = 3;
   string username = 4;
   repeated Pronoun pronouns = 5;
@@ -26,12 +25,53 @@ message User {
 }
 
 message CreateRequest {
-  reserved 2;
   bytes user_id = 1;
-  /** 2: Reserved for mojang uuid **/
+  optional bytes mojang_id = 2;
   bytes server_id = 3;
   string discord_id = 4;
   string username = 5;
+}
+
+message UpdateMojang {
+  bytes user_id = 1;
+  bytes mojang_id = 2;
+}
+
+
+enum UpdateMojangErrorKind {
+  UPDATE_NAME_ERROR_KIND_UNSPECIFIED = 0;
+  DUPLICATE_MOJANG_UUID = 1;
+}
+
+message UpdateMojangReply {
+  oneof reply {
+     UpdateMojangErrorKind error = 1;
+     User user = 2;
+  }
+}
+
+
+message UpdateUsername {
+  bytes user_id = 1;
+  string username = 2;
+}
+
+enum UpdateNameErrorKind {
+  UPDATE_NAME_ERROR_KIND_UNSPECIFIED = 0;
+  DUPLICATE_NAME = 1;
+}
+
+message UpdateNameReply {
+  oneof reply {
+     UpdateNameErrorKind error = 1;
+     User user = 2;
+  }
+}
+
+
+message UpdateDiscordId {
+  bytes user_id = 1;
+  string discord_id = 2;
 }
 
 enum CreateErrorKind {
@@ -72,5 +112,9 @@ service UserService {
   rpc Create(CreateRequest) returns (CreateReply);
   rpc Search(NameQuery) returns (NameReply);
   rpc Get(IdQuery) returns (IdReply);
+  rpc GetMojang(IdQuery) returns (IdReply);
   rpc Gets(PageQuery) returns (PagedUsers);
+  rpc SetUsername(UpdateUsername) returns (UpdateNameReply);
+  rpc SetMojang(UpdateMojang) returns (UpdateMojangReply);
+  rpc SetDiscord(UpdateDiscordId) returns (User);
 }
