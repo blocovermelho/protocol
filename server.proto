@@ -80,6 +80,6 @@ service ServerService {
   rpc Gets(PageQuery) returns (PagedServers);
   rpc UpdateModpack(UpdateModpackRequest) returns (Server);
   rpc UpdateVersions(UpdateVersionsRequest) returns (Server);
-  rpc SetOnline(OnlineRequest) returns ();
-  rpc SetOffline(OfflineRequest) returns ();
+  rpc SetOnline(OnlineRequest) returns (Server);
+  rpc SetOffline(OfflineRequest) returns (Server);
 }
