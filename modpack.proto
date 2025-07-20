@@ -4,7 +4,7 @@ syntax = "proto3";
  * Definitions for BV Wire API - Modpack
  */
 
-package org.blocovermelho.wire.proto;
+package org.blocovermelho.wire.modpack;
 
 import "version.proto";
 
