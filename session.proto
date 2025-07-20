@@ -33,13 +33,13 @@ message AllowRequest {
 enum AllowReplyKind {
   ALLOW_REPLY_KIND_UNSPECIFIED = 0;
   ACCEPTED_IP = 1;
-  MERGED_IP = 2;
+  ALLOW_MERGED_IP = 2;
   BANNED_IP = 3;
 }
 
 message AllowReply { AllowReplyKind type = 1; }
 
-message DissalowRequest {
+message DisallowRequest {
   reserved 2;
   oneof source {
     string discord_id = 11;
@@ -50,13 +50,13 @@ message DissalowRequest {
   /** 2: Reserved for future ipv6 support **/
 }
 
-enum DissalowReplyKind {
+enum DisallowReplyKind {
   DISALLOW_REPLY_KIND_UNSPECIFIED = 0;
   NEW_IP = 1;
-  MERGED_IP = 2;
+  DISALLOW_MERGED_IP = 2;
 }
 
-message DissalowReply { DissalowReplyKind type = 1; }
+message DisallowReply { DisallowReplyKind type = 1; }
 
 message PardonRequest {
   reserved 4;
@@ -77,6 +77,6 @@ message PardonReply { PardonReplyKind type = 1; }
 service Session {
   rpc Query(QueryRequest) returns (QueryReply);
   rpc AllowIp(AllowRequest) returns (AllowReply);
-  rpc DisallowIp(DissalowRequest) returns (DissalowReply);
+  rpc DisallowIp(DisallowRequest) returns (DisallowReply);
   rpc PardonIp(PardonRequest) returns (PardonReply);
 }
