@@ -58,7 +58,7 @@ message UpdateUsername {
 
 enum UpdateNameErrorKind {
   UPDATE_NAME_ERROR_KIND_UNSPECIFIED = 0;
-  DUPLICATE_NAME = 1;
+  UPDATE_DUPLICATE_NAME = 1;
 }
 
 message UpdateNameReply {
@@ -76,7 +76,7 @@ message UpdateDiscordId {
 
 enum CreateErrorKind {
   CREATE_ERROR_KIND_UNSPECIFIED = 0;
-  DUPLICATE_NAME = 1;
+  CREATE_DUPLICATE_NAME = 1;
 }
 
 message CreateUserReply {
