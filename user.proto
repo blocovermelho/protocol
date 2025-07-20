@@ -112,7 +112,7 @@ service UserService {
   rpc Create(CreateUserRequest) returns (CreateUserReply);
   rpc Search(NameQuery) returns (UserNameReply);
   rpc Get(IdQuery) returns (UserIdReply);
-  rpc GetMojang(IdQuery) returns (IdReply);
+  rpc GetMojang(IdQuery) returns (UserIdReply);
   rpc Gets(PageQuery) returns (PagedUsers);
   rpc SetUsername(UpdateUsername) returns (UpdateNameReply);
   rpc SetMojang(UpdateMojang) returns (UpdateMojangReply);
