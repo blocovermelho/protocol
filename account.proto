@@ -19,7 +19,7 @@ enum LoginReplyKind {
   reserved 2;
   LRK_UNSPECIFIED = 0;
   SUCCESSFUL = 1;
-  /** 2: Reserved for future One-Time-Password support **/
+  SUCCESSFUL_OTP = 2;
   WRONG_PASSWORD = 3;
   NO_USER_FOUND = 4;
 }
@@ -48,9 +48,15 @@ message DeleteReply {
   bool success = 2;
 }
 
+message OtpLoginRequest {
+  bytes user_uuid = 1;
+  string otp = 2;
+}
+
 service AccountService {
   rpc Create(LoginRequest) returns (CreateReply);
   rpc ChangePassword(PasswordChangeRequest) returns (LoginReply);
   rpc Login(LoginRequest) returns (LoginReply);
+  rpc OtpLogin(OtpLoginRequest) returns (LoginReply);
   rpc Delete(LoginRequest) returns (DeleteReply);
 }
